@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  bedrock:
+    build: .
+    container_name: bedrock
+    ports:
+      - "19132:19132/udp"
+    environment:
+      EULA: "TRUE"
+      LEVEL_NAME: "MyWorld"
+      SERVER_NAME: "My Minecraft Server"
+      MAX_PLAYERS: "10"
+    volumes:
+      - ./data:/data
+      - ./src/config:/data/config
+      - ./src/permissions:/data/permissions
+    restart: unless-stopped

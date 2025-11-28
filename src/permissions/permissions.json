@@ -1,33 +1,8 @@
 {
-  "roles": {
-    "admin": {
-      "permissions": [
-        "manage_server",
-        "manage_players",
-        "configure_settings",
-        "view_logs",
-        "ban_players"
-      ]
-    },
-    "moderator": {
-      "permissions": [
-        "manage_players",
-        "view_logs",
-        "ban_players"
-      ]
-    },
-    "player": {
-      "permissions": [
-        "join_game",
-        "chat",
-        "use_items"
-      ]
-    },
-    "guest": {
-      "permissions": [
-        "join_game",
-        "chat"
-      ]
+  "permission_levels": [
+    {
+      "xuid": "2535449237427063",
+      "permission": "operator"
     }
-  }
+  ]
 }
