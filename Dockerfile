@@ -9,8 +9,8 @@ ENV MAX_PLAYERS="10"
 EXPOSE 19132/udp
 
 # Copy server configuration files
-COPY ../src/config/server-config.json /data/server-config.json
-COPY ../src/permissions/permissions.json /data/permissions.json
+COPY src/config/server-config.json /data/server-config.json
+COPY src/permissions/permissions.json /data/permissions.json
 
 # Start the Minecraft Bedrock server
 CMD ["start"]
