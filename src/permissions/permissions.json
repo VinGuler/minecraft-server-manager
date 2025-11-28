@@ -1,0 +1,33 @@
+{
+  "roles": {
+    "admin": {
+      "permissions": [
+        "manage_server",
+        "manage_players",
+        "configure_settings",
+        "view_logs",
+        "ban_players"
+      ]
+    },
+    "moderator": {
+      "permissions": [
+        "manage_players",
+        "view_logs",
+        "ban_players"
+      ]
+    },
+    "player": {
+      "permissions": [
+        "join_game",
+        "chat",
+        "use_items"
+      ]
+    },
+    "guest": {
+      "permissions": [
+        "join_game",
+        "chat"
+      ]
+    }
+  }
+}

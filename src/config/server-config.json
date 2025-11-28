@@ -1,0 +1,18 @@
+{
+  "serverName": "My Minecraft Bedrock Server",
+  "serverPort": 19132,
+  "maxPlayers": 20,
+  "gamemode": "survival",
+  "difficulty": "normal",
+  "whitelist": false,
+  "enableCommandBlock": true,
+  "allowCheats": false,
+  "levelName": "world",
+  "viewDistance": 10,
+  "tickDistance": 4,
+  "maxWorldSize": 1024,
+  "spawnProtection": 16,
+  "onlineMode": true,
+  "pvp": true,
+  "motd": "Welcome to My Minecraft Server!"
+}
