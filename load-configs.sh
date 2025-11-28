@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cp src/config/permissions.json data/
-cp src/config/server.properties data/server.properties
+cp config/permissions.json data/
+cp config/server.properties data/server.properties
