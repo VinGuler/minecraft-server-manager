@@ -17,13 +17,13 @@ minecraft-server-manager
 │   ├── permissions
 │   │   └── permissions.json
 │   ├── index.js
-├── docker
-│   └── Dockerfile
 ├── docs
 │   └── PLAN.md
 ├── package.json
 ├── .dockerignore
 ├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
 └── README.md
 ```
 

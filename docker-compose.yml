@@ -13,6 +13,4 @@ services:
       MAX_PLAYERS: "10"
     volumes:
       - ./data:/data
-      - ./src/config:/data/config
-      - ./src/permissions:/data/permissions
     restart: unless-stopped
