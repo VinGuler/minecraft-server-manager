@@ -7,6 +7,22 @@ This guide provides step-by-step instructions to deploy the Minecraft Bedrock Ed
 - Basic knowledge of terminal commands.
 - An existing Minecraft world (optional).
 
+### Install Docker
+If Docker is not installed, follow these steps:
+```bash
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+### Install npm
+Ensure npm is installed:
+```bash
+sudo apt update
+sudo apt install -y npm
+```
+
 ## Steps
 
 ### 1. Clone the Repository
