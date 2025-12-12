@@ -1,11 +1,7 @@
 #!/bin/bash
 
-# Navigate to the server directory used by itzg image
-cd /data
+LOG_FILTER_PATTERN='attack_interval|nearest_attackable_target|behavior\.nearest_attackable_target'
 
-# Start Bedrock server but filter noisy behavior messages
-# Only removes AI spam, keeps everything else
-start 2>&1 \
-  | grep -v 'attack_interval' \
-  | grep -v 'nearest_attackable_target' \
-  | grep -v 'behavior.nearest_attackable_target'
+# --- Execution ---
+exec /start "$@" 2>&1 \
+  | grep --line-buffered -vE "$LOG_FILTER_PATTERN"
