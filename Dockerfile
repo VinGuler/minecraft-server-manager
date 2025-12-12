@@ -1,7 +1,7 @@
 FROM itzg/minecraft-bedrock-server:latest
 
 # Set environment variables for the server
-ENV SERVER_NAME="My Minecraft Server"
+ENV SERVER_NAME="Home MC Server"
 ENV SERVER_PORT="19132"
 ENV MAX_PLAYERS="10"
 
