@@ -18,6 +18,14 @@ BACKUP_PATH="${BACKUP_DIR}/${BACKUP_NAME}"
 # Ensure backup directory exists
 mkdir -p "$BACKUP_DIR"
 
+# Ensure no more than 3 backups exist
+BACKUP_COUNT=$(ls -1t "$BACKUP_DIR" | wc -l)
+if [ "$BACKUP_COUNT" -gt 3 ]; then
+  OLDEST_BACKUP=$(ls -1t "$BACKUP_DIR" | tail -1)
+  rm -f "$BACKUP_DIR/$OLDEST_BACKUP"
+  echo "🗑️ Deleted oldest backup: $OLDEST_BACKUP"
+fi
+
 # Create backup (zip only the data folder)
 cd "$BASE_DIR"
 zip -r "$BACKUP_PATH" "data"
