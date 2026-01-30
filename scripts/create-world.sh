@@ -123,6 +123,9 @@ services:
     restart: unless-stopped
     stdin_open: true
     tty: true
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
 EOF
 
 # Copy shared config
