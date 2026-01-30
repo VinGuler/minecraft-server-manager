@@ -1,2 +1,7 @@
+# Data folders (big files, transferred via scripts)
 data
+worlds/*/data
+
+# Uploads and backups
+uploads
 backups

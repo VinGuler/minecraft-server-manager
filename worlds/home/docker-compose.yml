@@ -1,0 +1,16 @@
+services:
+  minecraft:
+    build: ../..
+    container_name: mc-home
+    ports:
+      - "19132:19132/udp"
+    environment:
+      EULA: "TRUE"
+      LEVEL_NAME: "Home"
+      SERVER_NAME: "Home MC Server"
+      MAX_PLAYERS: "10"
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
