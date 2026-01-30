@@ -62,13 +62,14 @@ if [ -z "$BACKUP_FILE" ]; then
     echo ""
     echo "Available backups (newest first):"
     i=1
-    declare -a backups
+    # Store backups in a temp file for POSIX compatibility
+    backup_list=$(mktemp)
     for backup in $(ls -1t "$BACKUP_DIR"/*.zip 2>/dev/null); do
         backup_name=$(basename "$backup")
         backup_size=$(du -h "$backup" | cut -f1)
         echo "  $i) $backup_name ($backup_size)"
-        backups[$i]="$backup"
-        ((i++))
+        echo "$backup" >> "$backup_list"
+        i=$((i + 1))
     done
     echo ""
     read -p "Select backup number [1]: " BACKUP_NUM
@@ -77,7 +78,8 @@ if [ -z "$BACKUP_FILE" ]; then
         BACKUP_NUM=1
     fi
 
-    BACKUP_FILE="${backups[$BACKUP_NUM]}"
+    BACKUP_FILE=$(sed -n "${BACKUP_NUM}p" "$backup_list")
+    rm -f "$backup_list"
 
     if [ -z "$BACKUP_FILE" ] || [ ! -f "$BACKUP_FILE" ]; then
         echo -e "${RED}❌${NC} Invalid selection"
@@ -102,10 +104,10 @@ if docker ps --format '{{.Names}}' 2>/dev/null | grep -q "^${CONTAINER_NAME}$"; 
     echo ""
     echo -e "${YELLOW}⚠️  Container '$CONTAINER_NAME' is running${NC}"
     read -p "Stop container and proceed with restore? [y/N]: " STOP_CONTAINER
-    if [[ ! "$STOP_CONTAINER" =~ ^[Yy]$ ]]; then
-        echo "Restore cancelled."
-        exit 0
-    fi
+    case "$STOP_CONTAINER" in
+        [Yy]) ;;
+        *) echo "Restore cancelled."; exit 0 ;;
+    esac
     echo ""
     echo -e "${BLUE}🛑${NC} Stopping container..."
     docker stop "$CONTAINER_NAME"
@@ -115,10 +117,10 @@ fi
 echo ""
 echo -e "${YELLOW}⚠️  WARNING: This will replace all current data for '$WORLD_NAME'${NC}"
 read -p "Are you sure you want to restore? [y/N]: " CONFIRM
-if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
-    echo "Restore cancelled."
-    exit 0
-fi
+case "$CONFIRM" in
+    [Yy]) ;;
+    *) echo "Restore cancelled."; exit 0 ;;
+esac
 
 # Create world directory if it doesn't exist
 mkdir -p "$WORLD_DIR"

@@ -60,10 +60,10 @@ if docker ps --format '{{.Names}}' 2>/dev/null | grep -q "^${CONTAINER_NAME}$"; 
     echo -e "${YELLOW}   ./scripts/stop-world.sh $WORLD_NAME${NC}"
     echo ""
     read -p "Continue with backup anyway? [y/N]: " CONTINUE
-    if [[ ! "$CONTINUE" =~ ^[Yy]$ ]]; then
-        echo "Backup cancelled."
-        exit 0
-    fi
+    case "$CONTINUE" in
+        [Yy]) ;;
+        *) echo "Backup cancelled."; exit 0 ;;
+    esac
 fi
 
 # Date + unique 4-char code

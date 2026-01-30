@@ -59,11 +59,13 @@ if [ -z "$WORLD_NAME" ]; then
     exit 1
 fi
 
-# Validate world name
-if [[ ! "$WORLD_NAME" =~ ^[a-z0-9_-]+$ ]]; then
-    echo -e "${RED}❌${NC} World name must be lowercase letters, numbers, hyphens, or underscores only"
-    exit 1
-fi
+# Validate world name (POSIX-compatible)
+case "$WORLD_NAME" in
+    *[!a-z0-9_-]* | "")
+        echo -e "${RED}❌${NC} World name must be lowercase letters, numbers, hyphens, or underscores only"
+        exit 1
+        ;;
+esac
 
 # Check for .mcworld file
 MCWORLD_FILE="$UPLOADS_DIR/${WORLD_NAME}.mcworld"

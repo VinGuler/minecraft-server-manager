@@ -29,11 +29,13 @@ if [ -z "$WORLD_NAME" ]; then
     exit 1
 fi
 
-# Validate world name (lowercase, no spaces)
-if [[ ! "$WORLD_NAME" =~ ^[a-z0-9_-]+$ ]]; then
-    echo -e "${RED}❌${NC} World name must be lowercase letters, numbers, hyphens, or underscores only"
-    exit 1
-fi
+# Validate world name (lowercase, no spaces) - POSIX compatible
+case "$WORLD_NAME" in
+    *[!a-z0-9_-]* | "")
+        echo -e "${RED}❌${NC} World name must be lowercase letters, numbers, hyphens, or underscores only"
+        exit 1
+        ;;
+esac
 
 WORLD_DIR="$WORLDS_DIR/$WORLD_NAME"
 
@@ -69,11 +71,13 @@ if [ -z "$PORT" ]; then
     PORT="19132"
 fi
 
-# Validate port
-if [[ ! "$PORT" =~ ^[0-9]+$ ]]; then
-    echo -e "${RED}❌${NC} Port must be a number"
-    exit 1
-fi
+# Validate port - POSIX compatible
+case "$PORT" in
+    *[!0-9]* | "")
+        echo -e "${RED}❌${NC} Port must be a number"
+        exit 1
+        ;;
+esac
 
 # Check for port conflicts
 echo ""
